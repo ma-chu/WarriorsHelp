@@ -74,7 +74,13 @@ public class GameManager : MonoBehaviour
         }
         
         _currentSpawnPoint++;
+        
+        Invoke(nameof(MoveToNextPoint), 0.1f);    // чтоб точно погиб последний воин и не влиял со скорость 
 
+    }
+
+    private void MoveToNextPoint()
+    {
         if (enemiesSpawnPoints.Count > _currentSpawnPoint)
         {
             player.MoveArmy(enemiesSpawnPoints[_currentSpawnPoint].position);

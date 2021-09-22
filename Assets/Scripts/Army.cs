@@ -100,24 +100,21 @@ public class Army : MovableUnit
     
     private IEnumerator AddBoost(BoostType boost)
     {
-        int valueToAdd;
+        int newHealth;
         switch (boost.action)
         {
             case ActionType.Add:
-                valueToAdd = boost.value;
+                newHealth = boost.value + health;
                 break;
             case ActionType.Multiply:
-                valueToAdd = health * boost.value - health;
+                newHealth = health * boost.value;
                 break;
             default:
-                valueToAdd = 0;
+                newHealth = health;
                 break;
         }
 
-        var oldHealth = health;
-        var newHealth = health + valueToAdd;
-        
-        for (int i = oldHealth; i < newHealth; i++)
+        for (int i = health; i < newHealth; i++)
         {
             SpawnWarrior();
             health++;
